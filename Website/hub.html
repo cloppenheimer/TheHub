@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Welcome to the Hub </title>
+        <link rel="stylesheet" type="text/css" href="style.css" title="style" />
+        <script src="script.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <div id="main">
+            <div id="header">
+                <div id="title">
+                    <div id="title_text">
+                        <h1><a href="hub.html">The Hub</a></h1>
+                        <h2>Prototype</h2>
+                    </div>
+                </div>
+                <div id="menubar">
+                    <ul id="menu">
+                        <li class="header selected" onclick="showSection('home')"><a href="hub.html">Home</a></li>
+                        <li class="header" onclick="showSection('setup')"><a>Setup Instructions</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Raspberry Pi</a></li>
+                                <li><a href="#">Bluetooth Devices</a></li>
+                                <li><a href="#">Thing </a></li>
+                            </ul>
+                        </li>
+                        <li class="header" onclick="showSection('connect')"><a>Connect</a>
+                            <ul class="dropdown">
+                                <li><a href="#Wedo">WeDo</a></li>
+                                <li><a href="#Sphero">Sphero</a></li>
+                            </ul>
+                        </li>
+                        <li class="header" onclick="showSection('team')"><a>Team</a>
+                            <ul class="dropdown">
+                                <li><a href="#Annie">Annie Geheran</a></li>
+                                <li><a href="#Clara">Clara Oppenheimer</a></li>
+                                <li><a href="#Tanya">Tanya Sinha</a></li>
+                                <li><a href="#Winnie">Winnie Zheng</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div id="home">
+                <section>
+                    <h1>Project Description</h1>
+                    <h2>Problem</h2>
+                    <p> By 2020, it is estimated that there will be more than 30
+                        billion devices on the internet. As such, it has become
+                        increasingly important to educate students about the
+                        internet of things, or concisely knowns as “IoT.”  In
+                        order to do so, there are two main requirements:
+                        wireless network and IoT devices. Many public schools
+                        lack the funding to provide top-of-the-line technology
+                        for students to use. Today, the technology used in many
+                        classrooms are still predominantly Bluetooth (BLE)
+                        communication devices.
+                        </br>
+                    </p>
+                    <h2>Solution</h2>
+                    <div align="center">
+                        <img src = "/Users/winnie/Desktop/Senior Design/Senior-Design/Website/Pi3.jpg" hspace="30" class="zoom"/>
+                        <img src = "/Users/winnie/Desktop/Senior Design/Senior-Design/Website/Wedo.jpg" hspace="30" class="zoom"/>
+                        <img src = "/Users/winnie/Desktop/Senior Design/Senior-Design/Website/Sphero.jpg" hspace="30" class="zoom"/>
+                    </div>
+                    <p> Our solution is to create an interface that will allow
+                        Bluetooth devices to mimic the behavior of IoT devices,
+                        communication with multiple devices through a cloud, as
+                        opposed to the one-to-one communication that BLE devices
+                        are capable of. We will be implementing the interface on
+                        a Raspberry Pi 3. Only the Pi needs to be registered to
+                        the school network, regardless of how many BLE devices
+                        it’s acting as a relay for. The Pi will allow teachers
+                        to register multiple BLE devices with it, and these
+                        devices will be able to send and retrieve data from a
+                        local cloud that is operating through the Pi. This setup
+                        uses pre-existing BLE communication channel on the
+                        devices and on the Pi to create a BLE communication. The
+                        Pi then uses the pre-existing WiFi channel to
+                        communicate with a local cloud through a local network.
+                        The reliability of these connection will depend on the
+                        manufacturing of the BLE devices, the Raspberry Pi, and
+                        the school WLAN.
+
+                        While this setup does propose a security risk for the
+                        school, it is design to minimize the vulnerability as
+                        much as possible with having just one direct connection
+                        to the network rather than multiple. The risk that the
+                        Pi does propose is similar to having an personal device
+                        on the school network.
+                        </br>
+                    </p>
+                    <h2>Goals</h2>
+                    <p> Our goal is to implement an intuitive, transparent
+                        system that will allow two types of BLE devices, WeDo
+                        and Sphero, to communicate with each other through a
+                        cloud wireless network. These devices will be registered
+                        with the Pi so that only they can access the local
+                        cloud. The devices will then be able to send and
+                        retrieve data from the local cloud independently. The
+                        process of setting up the system, registering devices,
+                        and setting up the local cloud is aimed to be as
+                        user-friendly as positive (will be covered in the
+                        Assumptions/Risks/Mitigations section of this project
+                        plan) because we want teachers of all technological
+                        background to be able to use the system. Therefore,
+                        along with the Pi interface, we will also be developing
+                        a website where there will be tutorials and GUI to the
+                        Pi.
+                        </br>
+                    </p>
+                </section>
+            </div>
+            <div id="setup" style="display: none;"></div>
+            <div id="connect" style="display: none;">
+                <section>
+                    <h1 id="WeDo">WeDo</h1>
+                    <button style="background-color:green;" onclick="connectDevice('wedo')">CONNECT</button>
+                    <button onclick="disconnectDevice('wedo')">DISCONNECT</button>
+                    <h3>Data Retrieved from the Pi</h3>
+                    <div id="receivedWedo">
+                    </div>
+                    <h3>Data Sent to the Pi</h3>
+                    <div id="sentWedo">
+                    </diV>
+                    <div class="grid-container">
+                      <button onclick="wedoMove()" class="grid-item">MOVE</button>
+                      <button onclick="wedoColor()" class="grid-item">CHANGE COLOR</button>
+                      <button onclick="wedoTilt()" class="grid-item">GET TILT DEGREE</button>
+                      <button onclick="wedoDistance()" class="grid-item">GET DISTANCE</button>
+                    </div>
+                </section>
+
+                <section>
+                    <h1 id="Sphero">Sphero</h1>
+                    <button style="background-color:green;" onclick="connectDevice('sphero')">CONNECT</button>
+                    <button onclick="disconnectDevice('sphero')">DISCONNECT</button>
+                    <h3>Data Retrieved from the Pi</h3>
+                    <div id="receivedSphero">
+                    </div>
+                    <h3>Data Sent to the Pi</h3>
+                    <div id="sentSphero">
+                    </diV>
+                    <div class="grid-container">
+                      <button onclick="spheroMove()" class="grid-item">MOVE FORWARD</button>
+                      <button onclick="spheroColor()" class="grid-item">CHANGE COLOR</button>
+                    </div>
+                </section>
+            </div>
+            <div id="team" style="display: none;">
+                <section>
+                    <h1 id="Annie">Annie Geheran</h1>
+                    <h2> Electrical Engineering, Tufts 2019 </h2>
+                    <img src="/Users/winnie/Desktop/Senior Design/Senior-Design/Website/Annie.png"/>
+                    <p></p>
+                </section>
+                <section>
+                    <h1 id="Clara">Clara Oppenheimer</h1>
+                    <h2> Computer Science, Tufts 2019 </h2>
+                    <img src="/Users/winnie/Desktop/Senior Design/Senior-Design/Website/Clara.jpg"/>
+                    <p></p>
+                </section>
+                <section>
+                    <h1 id="Tanya">Tanya Sinha</h1>
+                    <h2> Computer Science, Tufts 2019 </h2>
+                    <img src="/Users/winnie/Desktop/Senior Design/Senior-Design/Website/Tanya.jpg"/>
+                    <p></p>
+                </section>
+                <section>
+                    <h1 id="Winnie">Winnie Zheng</h1>
+                    <h2> Electrical Engineering, Tufts 2019 </h2>
+                    <img src="/Users/winnie/Desktop/Senior Design/Senior-Design/Website/Winnie.jpg"/>
+                    <p></p>
+                </section>
+            </div>
+        </div>
+    </body>
+</html>
