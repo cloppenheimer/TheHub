@@ -1,5 +1,4 @@
-# THE HUB
-# QUICK START GUIDE
+# THE HUB QUICK START GUIDE
 
 ## Installation
 1. Git clone the repo: https://github.com/cloppenheimer/TheHub.git
